@@ -8,5 +8,4 @@ android/.gradle/
 android/app/build/
 android/build/
 ios/build/
-*.apk
 *.avi
