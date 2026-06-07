@@ -1,92 +1,219 @@
 # Ledger (household-ledger)
 
-엑셀 가계부 파일을 기반으로 한 **Android 네이티브 앱**입니다. (Expo + React Native)
+## Application Info
 
-프로젝트 경로: `~/work/household-ledger`
+| Item | Value |
+|------|-------|
+| **App name (English)** | Ledger |
+| **App name (Korean)** | 가계부 |
+| **App name (Japanese)** | 家計簿 |
+| **Package name** | `com.household.ledger` |
+| **Project folder** | `household-ledger` |
+| **Platform** | Android (Expo + React Native) |
 
-## 기능
+---
 
-- 월별 수입/지출 입력 (구분, 결제수단, 금액, 내용, 비고)
-- 달력 뷰 (평일 勤 / 휴일 休, 일별 지출)
-- 대시보드 (월별 요약, 차트, 결제수단별 통계)
-- 엑셀 가져오기/보내기 (기존 `2026년달력` 형식 호환)
-- **영수증 스캔** — 카메라로 촬영 시 OCR로 금액·날짜·가게명 자동 인식 후 지출 등록
-- 저축 계획 설정 (월급, 상여, 고정비, 월세)
+## Overview
 
-## 사전 요구사항
+**Ledger** is a **household income and expense management app** that brings Excel-based ledger workflows to mobile.
 
-- Node.js 18+ (권장: `~/.nodebrew/node/v20.18.0`)
-- JDK 17+ (`~/.jdks/jdk-17.0.19+10`)
-- Android SDK (`~/Library/Android/sdk`)
+It is compatible with the existing `2026년달력` Excel format and provides monthly income/expense tracking, calendar-based scheduling, a monthly summary dashboard, receipt OCR auto-registration, and Excel import/export.
 
-## 실행 방법
+The app supports **한국어 · 日本語 · English**. You can switch the UI language in Settings.
 
-### 1. 의존성 설치
+**Documentation:** [README_KOR.md](README_KOR.md) (Korean) · [README_JAP.md](README_JAP.md) (Japanese)
+
+---
+
+## Key Features
+
+### 1. Monthly Summary Dashboard
+
+View **expenses, income, and balance** for the selected month at a glance. Includes a daily expense bar chart, payment method statistics, and work day (勤) / rest day (休) schedule summary.
+
+![Summary Dashboard](docs/screenshots/en/dashboard.png)
+
+| Feature | Description |
+|---------|-------------|
+| Monthly summary | Total expense, income, and balance for the month |
+| Daily expense chart | Bar graph showing spending by day |
+| Payment method stats | Totals by Card, PayPay, Cash, etc. |
+| Schedule summary | Work days (勤) and rest days (休) count |
+
+---
+
+### 2. Income & Expense Records
+
+View monthly income and expense records in a list. **Add, edit, and delete** entries. Each record includes type, payment method, amount, description, and memo.
+
+![Records List](docs/screenshots/en/transactions.png)
+
+| Feature | Description |
+|---------|-------------|
+| Record list | Income/expense list sorted by date |
+| Add record | Tap + to add a new income or expense |
+| Edit record | Tap a row or the Edit button |
+| Delete record | Tap Delete to remove an entry |
+
+**Payment methods:** Cash, Card, PayPay, Rakuten Pay, Bank Transfer
+
+---
+
+### 3. Calendar View
+
+See **daily expenses** on a monthly calendar. Tap a date to view detailed records for that day. Work days (勤) and rest days (休) are visually distinguished.
+
+![Calendar Screen](docs/screenshots/en/calendar.png)
+
+| Feature | Description |
+|---------|-------------|
+| Monthly calendar | Daily expense amounts shown in calendar cells |
+| Date selection | Tap a date to see actual expense/income and records |
+| Work/rest days | Weekdays marked 勤, holidays marked 休 |
+| Edit from calendar | Tap a record to open the edit screen |
+
+---
+
+### 4. Add / Edit Record
+
+Form screen for registering or editing income or expenses. Enter year, month, day, type, payment method, amount, description, and memo.
+
+![Add / Edit Record](docs/screenshots/en/add-transaction.png)
+
+| Feature | Description |
+|---------|-------------|
+| Type selection | Expense or Income |
+| Date input | Set year, month, and day |
+| Payment method | Cash, Card, PayPay, etc. |
+| Amount & details | Enter amount, description, and optional memo |
+
+---
+
+### 5. Receipt Scan (OCR)
+
+Take a photo with the camera or choose from the gallery. **ML Kit OCR** automatically detects amount, date, store name, and payment method. Choose auto-save or edit before saving.
+
+![Receipt Scan](docs/screenshots/en/receipt-scan.png)
+
+| Feature | Description |
+|---------|-------------|
+| Camera capture | Photograph a receipt directly |
+| Gallery select | Choose a saved receipt image |
+| OCR recognition | Auto-extract amount, date, store, payment method |
+| Auto save | Confirm and register as expense immediately |
+| Edit & save | Review and modify before saving |
+
+**Supported receipt languages:** Korean, Japanese (multi-script OCR: Korean · Japanese · Latin)
+
+---
+
+### 6. Settings
+
+Manage language, Excel sync, expected expenses, savings plan, and data reset.
+
+![Settings Screen](docs/screenshots/en/settings.png)
+
+| Feature | Description |
+|---------|-------------|
+| Language | Choose 한국어 / 日本語 / English |
+| Excel import | Load an existing ledger Excel file |
+| Excel export | Export current data to Excel |
+| Expected expense | Set weekday (勤) and holiday (休) expected amounts |
+| Savings plan | Enter salary, bonus, fixed costs, rent |
+| Reset data | Delete all stored data |
+
+---
+
+## Excel Integration
+
+| Sheet | Description |
+|-------|-------------|
+| `지출기록_N월` | Monthly income/expense records |
+| `2026년달력` | Calendar and expected expenses |
+| `참조` | Payment methods, weekday/holiday expected expenses |
+| `2026년휴일` | Public holidays |
+| `2026저축계획` | Salary, fixed costs, rent, etc. |
+
+Import and export Excel files from the **Settings** tab.
+
+---
+
+## Changelog
+
+### v1.1.0 (2026-06-07)
+
+| Category | Details |
+|----------|---------|
+| **Project** | Renamed folder `reactNative` → `household-ledger`, app display name **Ledger** |
+| **i18n** | Korean · Japanese · English UI (switchable in Settings) |
+| **Receipt OCR** | Triple OCR (Korean/Japanese/Latin), text normalization, score-based amount extraction, store & payment detection |
+| **Record editing** | Edit/delete income and expenses from list and calendar |
+| **Docs** | Added `README_KOR.md`, `README_JAP.md`, `README.md` with feature screenshots |
+| **Cleanup** | Removed unused `web/` source |
+| **APK** | `household-ledger.apk` (Release, ~104MB, Git LFS) |
+
+**APK download**
+
+- Repository root: `household-ledger.apk` (requires [Git LFS](https://git-lfs.github.com/))
+- Build output: `android/app/build/outputs/apk/release/app-release.apk`
 
 ```bash
+# Clone with LFS
+git lfs install
+git clone https://github.com/xiger78/household-ledger.git
+
+# Rebuild APK
 export PATH="$HOME/.nodebrew/node/v20.18.0/bin:$PATH"
-npm install
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export JAVA_HOME="$HOME/.jdks/jdk-17.0.19+10/Contents/Home"
+cd ~/work/household-ledger/android
+./gradlew assembleRelease
 ```
 
-### 2. Android 에뮬레이터/기기에서 실행
+### v1.0.0 (2026-06-07)
+
+- Initial Android release based on Excel household ledger
+- Monthly income/expense, calendar, dashboard, Excel import/export
+- Receipt scan (ML Kit OCR), savings plan settings
+
+---
+
+## Installation & Development
+
+### Prerequisites
+
+- Node.js 18+ (recommended: v20)
+- JDK 17+
+- Android SDK
+
+### Run on device / emulator
 
 ```bash
 export PATH="$HOME/.nodebrew/node/v20.18.0/bin:$PATH"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export JAVA_HOME="$HOME/.jdks/jdk-17.0.19+10/Contents/Home"
 
+cd ~/work/household-ledger
+npm install
 npm run android
 ```
 
-### 3. APK 빌드 (디버그)
+### Build APK
 
 ```bash
-chmod +x scripts/android-build.sh
-./scripts/android-build.sh
+./scripts/android-build.sh          # debug APK
+cd android && ./gradlew assembleRelease   # release APK
 ```
 
-생성 위치: `android/app/build/outputs/apk/debug/app-debug.apk`
+---
 
-### 4. Expo 개발 서버만 실행
+## Tech Stack
 
-```bash
-npm start
-```
-
-## 엑셀 연동
-
-| 시트 | 설명 |
-|------|------|
-| `지출기록_N월` | 월별 수입/지출 |
-| `2026년달력` | 달력/예상지출 |
-| `참조` | 결제수단, 평일/휴일 예상지출 |
-| `2026년휴일` | 공휴일 |
-| `2026저축계획` | 월급, 고정비 등 |
-
-앱 **설정** 탭에서 엑셀 파일을 가져오거나보낼 수 있습니다.
-
-## 프로젝트 구조
-
-```
-App.tsx                 # 메인 앱 (탭 네비게이션)
-src/
-  components/           # UI 컴포넌트
-  store/database.ts     # AsyncStorage 데이터 저장
-  utils/excel.ts        # 엑셀 가져오기/보내기
-  types/                # 타입 정의
-android/                # Android 네이티브 프로젝트
-docs/screenshots/       # README용 화면 캡처
-```
-
-## 영수증 스캔 사용법
-
-1. **내역** 또는 **달력** 탭에서 📷 버튼 탭
-2. 카메라로 영수증 촬영 (또는 갤러리에서 선택)
-3. OCR이 금액·날짜·가게명·결제수단을 자동 인식
-4. **자동 등록** 또는 **수정 후 저장** 선택
-
-일본어/한국어 영수증을 지원합니다 (ML Kit OCR).
-
-## 결제수단
-
-현금, 카드, 페이페이, 라쿠텐페이, 계좌이체
+| Area | Technology |
+|------|------------|
+| Framework | Expo SDK 52, React Native 0.76 |
+| Storage | AsyncStorage |
+| Excel | xlsx |
+| Receipt OCR | @react-native-ml-kit/text-recognition |
+| Camera / Gallery | expo-image-picker |
+| Languages | Korean / Japanese / English |
