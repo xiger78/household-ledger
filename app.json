@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Ledger",
+    "slug": "household-ledger",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4F46E5"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4F46E5"
+      },
+      "package": "com.household.ledger"
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "영수증 촬영을 위해 카메라 접근이 필요합니다.",
+          "photosPermission": "영수증 사진을 선택하기 위해 갤러리 접근이 필요합니다."
+        }
+      ]
+    ]
+  }
+}

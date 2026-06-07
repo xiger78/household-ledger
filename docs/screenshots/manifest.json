@@ -1,0 +1,16 @@
+{
+  "source": "ui_mockup_images",
+  "generatedAt": "2026-06-07T01:58:49.883Z",
+  "languages": [
+    "ko",
+    "ja"
+  ],
+  "screens": [
+    "dashboard",
+    "transactions",
+    "calendar",
+    "add-transaction",
+    "receipt-scan",
+    "settings"
+  ]
+}

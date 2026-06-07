@@ -1,0 +1,15 @@
+export const colors = {
+  primary: '#4F46E5',
+  primaryDark: '#3730A3',
+  expense: '#EF4444',
+  income: '#10B981',
+  bg: '#F8FAFC',
+  card: '#FFFFFF',
+  text: '#1E293B',
+  textSecondary: '#64748B',
+  border: '#E2E8F0',
+  workBadge: '#DBEAFE',
+  workText: '#1D4ED8',
+  restBadge: '#FEE2E2',
+  restText: '#DC2626',
+};
